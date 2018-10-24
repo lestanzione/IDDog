@@ -1,7 +1,9 @@
-package br.com.stanzione.iddog;
+package br.com.stanzione.iddog.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.stanzione.iddog.R;
 
 public class MainActivity extends AppCompatActivity {
 
