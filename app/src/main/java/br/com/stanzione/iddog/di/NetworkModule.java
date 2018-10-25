@@ -1,5 +1,6 @@
 package br.com.stanzione.iddog.di;
 
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -40,7 +41,12 @@ public class NetworkModule {
                 .client(client)
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(
+                        GsonConverterFactory.create(
+                                new GsonBuilder()
+                                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                                        .create()
+                        ))
                 .build();
     }
 
