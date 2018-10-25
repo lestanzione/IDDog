@@ -17,7 +17,7 @@ public interface MainContract {
     }
 
     interface Repository {
-        Observable<User.UserResponse> doLogin(LoginRequest loginRequest);
+        Observable<User.UserResponse> doLogin(String email);
         void persistToken(String token);
     }
 

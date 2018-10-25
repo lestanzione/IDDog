@@ -18,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.util.Patterns.EMAIL_ADDRESS;
+
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.constraintLayout)
@@ -61,7 +63,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @OnClick(R.id.loginButton)
     public void loginButtonClicked(){
-        presenter.doLogin(emailEditText.getText().toString());
+        String email = emailEditText.getText().toString();
+        if(isValidEmail(email)) {
+            presenter.doLogin(email);
+        }
+        else{
+            showMessage("Invalid email");
+        }
     }
 
     @Override
@@ -76,5 +84,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         } else {
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private boolean isValidEmail(String email){
+        return EMAIL_ADDRESS.matcher(email).matches();
     }
 }

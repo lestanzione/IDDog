@@ -20,8 +20,8 @@ public class MainRepository implements MainContract.Repository {
     }
 
     @Override
-    public Observable<User.UserResponse> doLogin(LoginRequest loginRequest) {
-        return dogApi.doLogin(loginRequest.toJson());
+    public Observable<User.UserResponse> doLogin(String email) {
+        return dogApi.doLogin(createLoginRequest(email).toJson());
     }
 
     @Override
@@ -29,5 +29,9 @@ public class MainRepository implements MainContract.Repository {
         preferences.edit()
                 .putString("token", token)
                 .apply();
+    }
+
+    private LoginRequest createLoginRequest(String email){
+        return new LoginRequest(email);
     }
 }
