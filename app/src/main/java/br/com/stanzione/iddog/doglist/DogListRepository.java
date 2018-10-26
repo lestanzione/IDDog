@@ -21,7 +21,13 @@ public class DogListRepository implements DogListContract.Repository{
     @Override
     public Observable<String> getToken() {
         String token = preferences.getString("token", null);
-        return Observable.just(token);
+
+        if(!TextUtils.isEmpty(token)) {
+            return Observable.just(token);
+        }
+        else{
+            return Observable.error(new Throwable());
+        }
     }
 
     @Override
