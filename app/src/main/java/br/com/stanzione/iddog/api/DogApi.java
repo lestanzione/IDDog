@@ -9,9 +9,11 @@ import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface DogApi {
 
@@ -20,7 +22,7 @@ public interface DogApi {
     Observable<User.UserResponse> doLogin(@Body JsonObject email);
 
     @Headers("Content-type: application/json")
-    @GET("feed?category={category}")
-    Observable<DogGallery> getDogs(@Path("category") String category);
+    @GET("feed")
+    Observable<DogGallery> getDogs(@Header("Authorization") String token, @Query("category") String category);
 
 }

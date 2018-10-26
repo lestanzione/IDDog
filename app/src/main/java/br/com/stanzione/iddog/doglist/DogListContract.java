@@ -20,7 +20,7 @@ public interface DogListContract {
 
     interface Repository {
         Observable<String> getToken();
-        Observable<DogGallery> fetchImages(DogType dogType);
+        Observable<DogGallery> fetchImages(String token, DogType dogType);
     }
 
 }

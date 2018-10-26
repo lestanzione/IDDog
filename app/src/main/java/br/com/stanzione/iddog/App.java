@@ -6,6 +6,7 @@ import br.com.stanzione.iddog.di.AndroidModule;
 import br.com.stanzione.iddog.di.ApplicationComponent;
 import br.com.stanzione.iddog.di.DaggerApplicationComponent;
 import br.com.stanzione.iddog.di.NetworkModule;
+import br.com.stanzione.iddog.doglist.DogListModule;
 import br.com.stanzione.iddog.main.MainModule;
 
 public class App extends Application {
@@ -18,6 +19,7 @@ public class App extends Application {
                 .androidModule(new AndroidModule(this))
                 .networkModule(new NetworkModule())
                 .mainModule(new MainModule())
+                .dogListModule(new DogListModule())
                 .build();
     }
 

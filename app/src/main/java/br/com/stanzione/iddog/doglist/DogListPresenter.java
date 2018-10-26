@@ -1,61 +1,67 @@
-package br.com.stanzione.iddog.main;
+package br.com.stanzione.iddog.doglist;
 
-import java.io.IOException;
-
-import br.com.stanzione.iddog.data.User;
+import br.com.stanzione.iddog.data.DogGallery;
+import br.com.stanzione.iddog.data.DogType;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainPresenter implements MainContract.Presenter {
+public class DogListPresenter implements DogListContract.Presenter {
 
-    private MainContract.View view;
-    private MainContract.Repository repository;
+    private DogListContract.View view;
+    private DogListContract.Repository repository;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public MainPresenter(MainContract.Repository repository){
+    public DogListPresenter(DogListContract.Repository repository){
         this.repository = repository;
     }
 
     @Override
-    public void doLogin(String email){
+    public void getImageList(DogType dogType) {
 
         view.setProgressBarVisible(true);
 
+        compositeDisposable.clear();
+
         compositeDisposable.add(
-                repository.doLogin(email)
+                repository.getToken()
+                        .switchMap(new Function<String, ObservableSource<DogGallery>>() {
+                            @Override
+                            public ObservableSource<DogGallery> apply(String s) throws Exception {
+                                return repository.fetchImages(s, dogType);
+                            }
+                        })
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                new Consumer<User.UserResponse>() {
+                                new Consumer<DogGallery>() {
                                     @Override
-                                    public void accept(User.UserResponse userResponse) throws Exception {
-                                        repository.persistToken(userResponse.getUser().getToken());
+                                    public void accept(DogGallery dogGallery) throws Exception {
+                                        System.out.println(dogGallery);
+
                                         view.setProgressBarVisible(false);
-                                        view.navigateToDogList();
+                                        view.showDogGallery(dogGallery.getImageUrlList());
                                     }
                                 },
                                 new Consumer<Throwable>() {
                                     @Override
                                     public void accept(Throwable throwable) throws Exception {
                                         throwable.printStackTrace();
-                                        if(throwable instanceof IOException){
-                                            view.showMessage("Network error!");
-                                        }
-                                        else{
-                                            view.showMessage("API error!");
-                                        }
+
                                         view.setProgressBarVisible(false);
                                     }
                                 }
                         )
         );
+
     }
 
     @Override
-    public void attachView(MainContract.View view) {
+    public void attachView(DogListContract.View view) {
         this.view = view;
     }
 
@@ -65,5 +71,4 @@ public class MainPresenter implements MainContract.Presenter {
             compositeDisposable.dispose();
         }
     }
-
 }
