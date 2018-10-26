@@ -1,5 +1,6 @@
 package br.com.stanzione.iddog.doglist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,11 +20,12 @@ import br.com.stanzione.iddog.App;
 import br.com.stanzione.iddog.R;
 import br.com.stanzione.iddog.data.DogType;
 import br.com.stanzione.iddog.doglist.adapter.DogImagesAdapter;
+import br.com.stanzione.iddog.imagedetail.ImageDetailActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DogListActivity extends AppCompatActivity implements DogListContract.View,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener, DogImagesAdapter.OnDogImageSelectedListener {
 
     @BindView(R.id.dogRecyclerView)
     RecyclerView dogRecyclerView;
@@ -65,7 +67,7 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        adapter = new DogImagesAdapter(this);
+        adapter = new DogImagesAdapter(this, this);
         dogRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         dogRecyclerView.setAdapter(adapter);
 
@@ -111,5 +113,12 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDogImageSelected(String imageUrl) {
+        Intent intent = new Intent(this, ImageDetailActivity.class);
+        intent.putExtra("imageUrl", imageUrl);
+        startActivity(intent);
     }
 }
