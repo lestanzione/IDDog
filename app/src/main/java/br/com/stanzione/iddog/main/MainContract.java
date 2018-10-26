@@ -9,6 +9,8 @@ public interface MainContract {
 
     interface View extends BaseView {
         void showMessage(String message);
+        void showNetworkMessage();
+        void showApiMessage();
         void navigateToDogList();
     }
 

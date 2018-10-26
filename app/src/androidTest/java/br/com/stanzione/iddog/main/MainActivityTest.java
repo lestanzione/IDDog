@@ -82,13 +82,13 @@ public class MainActivityTest {
         onView(withId(R.id.loginButton))
                 .perform(click());
 
-        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText("Invalid email")))
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.message_invalid_email)))
                 .check(matches(isDisplayed()));
 
     }
 
     @Test
-    public void withValidEmailShouldPass() throws IOException, InterruptedException {
+    public void withValidEmailShouldPass() throws IOException {
 
         server.enqueue(new MockResponse()
                 .setBody(readFile("token_response.json")));

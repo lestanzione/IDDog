@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">IDDog</string>
+    <string name="hint_email">Email</string>
+    <string name="button_login">Login</string>
+    <string name="navigation_item_husky">Husky</string>
+    <string name="navigation_item_pound">Pound</string>
+    <string name="navigation_item_pug">Pug</string>
+    <string name="navigation_item_labrador">Labrador</string>
+    <string name="message_network_error">A network error has occurred. Check your Internet connection and try again later.</string>
+    <string name="message_api_error">Error. Try again later.</string>
+    <string name="message_invalid_email">Invalid email</string>
+    <string name="message_general_error">Error getting dog list</string>
 </resources>

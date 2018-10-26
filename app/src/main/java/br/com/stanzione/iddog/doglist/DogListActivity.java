@@ -81,8 +81,8 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
     }
 
     @Override
-    public void showMessage(String message) {
-        Snackbar.make(dogRecyclerView, message, Snackbar.LENGTH_LONG).show();
+    public void showMessage() {
+        Snackbar.make(dogRecyclerView, getResources().getString(R.string.message_general_error), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

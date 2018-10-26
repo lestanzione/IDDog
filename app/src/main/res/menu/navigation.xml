@@ -4,21 +4,21 @@
     <item
         android:id="@+id/navigationHusky"
         android:icon="@drawable/ic_dog_24dp"
-        android:title="Husky" />
+        android:title="@string/navigation_item_husky" />
 
     <item
         android:id="@+id/navigationPound"
         android:icon="@drawable/ic_dog_24dp"
-        android:title="Pound" />
+        android:title="@string/navigation_item_pound" />
 
     <item
         android:id="@+id/navigationPug"
         android:icon="@drawable/ic_dog_24dp"
-        android:title="Pug" />
+        android:title="@string/navigation_item_pug" />
 
     <item
         android:id="@+id/navigationLabrador"
         android:icon="@drawable/ic_dog_24dp"
-        android:title="Labrador" />
+        android:title="@string/navigation_item_labrador" />
 
 </menu>

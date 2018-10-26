@@ -126,7 +126,7 @@ public class DogListActivityTest {
 
         Thread.sleep(1000);
 
-        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText("Error getting dog list!")))
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.message_general_error)))
                 .check(matches(isDisplayed()));
 
     }

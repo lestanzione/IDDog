@@ -101,7 +101,7 @@ public class DogListPresenterTest {
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, times(1)).setEmptyStateVisible(false);
         verify(mockView, never()).setEmptyStateVisible(true);
-        verify(mockView, never()).showMessage(anyString());
+        verify(mockView, never()).showMessage();
         verify(mockRepository, times(1)).getToken();
         verify(mockRepository, times(1)).fetchImages(token, dogType);
 
@@ -119,7 +119,7 @@ public class DogListPresenterTest {
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, times(1)).setEmptyStateVisible(false);
         verify(mockView, times(1)).setEmptyStateVisible(true);
-        verify(mockView, never()).showMessage(anyString());
+        verify(mockView, never()).showMessage();
         verify(mockRepository, times(1)).getToken();
         verify(mockRepository, times(1)).fetchImages(token, dogType);
 
@@ -137,7 +137,7 @@ public class DogListPresenterTest {
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, times(1)).setEmptyStateVisible(false);
         verify(mockView, never()).setEmptyStateVisible(true);
-        verify(mockView, times(1)).showMessage(anyString());
+        verify(mockView, times(1)).showMessage();
         verify(mockRepository, times(1)).getToken();
         verify(mockRepository, never()).fetchImages(anyString(), any(DogType.class));
 

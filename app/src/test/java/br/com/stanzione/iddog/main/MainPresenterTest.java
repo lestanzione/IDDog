@@ -97,6 +97,8 @@ public class MainPresenterTest {
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, never()).showMessage(anyString());
+        verify(mockView, never()).showApiMessage();
+        verify(mockView, never()).showNetworkMessage();
         verify(mockRepository, times(1)).doLogin(validEmail);
         verify(mockRepository, times(1)).persistToken(token);
     }
@@ -110,7 +112,9 @@ public class MainPresenterTest {
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
-        verify(mockView, times(1)).showMessage(anyString());
+        verify(mockView, never()).showMessage(anyString());
+        verify(mockView, never()).showApiMessage();
+        verify(mockView, times(1)).showNetworkMessage();
         verify(mockRepository, times(1)).doLogin(validEmail);
         verify(mockRepository, never()).persistToken(anyString());
 
@@ -125,7 +129,9 @@ public class MainPresenterTest {
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
-        verify(mockView, times(1)).showMessage(anyString());
+        verify(mockView, never()).showMessage(anyString());
+        verify(mockView, times(1)).showApiMessage();
+        verify(mockView, never()).showNetworkMessage();
         verify(mockRepository, times(1)).doLogin(validEmail);
         verify(mockRepository, never()).persistToken(anyString());
 

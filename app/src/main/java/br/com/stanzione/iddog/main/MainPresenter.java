@@ -55,10 +55,10 @@ public class MainPresenter implements MainContract.Presenter {
 
     private void onTokenGenerationError(Throwable throwable){
         if(throwable instanceof IOException){
-            view.showMessage("Network error!");
+            view.showNetworkMessage();
         }
         else{
-            view.showMessage("API error!");
+            view.showApiMessage();
         }
         view.setProgressBarVisible(false);
     }

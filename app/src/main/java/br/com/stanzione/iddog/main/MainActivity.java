@@ -76,13 +76,23 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             presenter.doLogin(email);
         }
         else{
-            showMessage("Invalid email");
+            showMessage(getResources().getString(R.string.message_invalid_email));
         }
     }
 
     @Override
     public void showMessage(String message) {
         Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNetworkMessage() {
+        Snackbar.make(constraintLayout, getResources().getString(R.string.message_network_error), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showApiMessage() {
+        Snackbar.make(constraintLayout, getResources().getString(R.string.message_api_error), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

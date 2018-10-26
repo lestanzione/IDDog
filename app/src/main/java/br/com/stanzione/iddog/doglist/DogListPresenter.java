@@ -71,7 +71,7 @@ public class DogListPresenter implements DogListContract.Presenter {
 
     private void onDogGalleryError(Throwable throwable) {
         view.setProgressBarVisible(false);
-        view.showMessage("Error getting dog list!");
+        view.showMessage();
     }
 
 }
