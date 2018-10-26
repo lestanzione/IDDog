@@ -54,6 +54,12 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
         setUpInjector();
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.dispose();
+        super.onDestroy();
+    }
+
     private void setUpInjector(){
         ((App) getApplicationContext())
                 .getApplicationComponent()

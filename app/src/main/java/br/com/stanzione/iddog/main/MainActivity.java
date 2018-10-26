@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setUpInjector();
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.dispose();
+        super.onDestroy();
+    }
+
     private void setUpInjector(){
         ((App) getApplicationContext())
                 .getApplicationComponent()
