@@ -11,6 +11,7 @@ import io.reactivex.Observable;
 public interface DogListContract {
 
     interface View extends BaseView {
+        void showMessage(String message);
         void showDogGallery(List<String> imageUrlList);
         void setEmptyStateVisible(boolean visible);
     }

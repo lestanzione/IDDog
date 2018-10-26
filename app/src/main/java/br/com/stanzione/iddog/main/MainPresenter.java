@@ -29,27 +29,8 @@ public class MainPresenter implements MainContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                new Consumer<User.UserResponse>() {
-                                    @Override
-                                    public void accept(User.UserResponse userResponse) throws Exception {
-                                        repository.persistToken(userResponse.getUser().getToken());
-                                        view.setProgressBarVisible(false);
-                                        view.navigateToDogList();
-                                    }
-                                },
-                                new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
-                                        throwable.printStackTrace();
-                                        if(throwable instanceof IOException){
-                                            view.showMessage("Network error!");
-                                        }
-                                        else{
-                                            view.showMessage("API error!");
-                                        }
-                                        view.setProgressBarVisible(false);
-                                    }
-                                }
+                                this::onTokenReceived,
+                                this::onTokenGenerationError
                         )
         );
     }
@@ -64,6 +45,22 @@ public class MainPresenter implements MainContract.Presenter {
         if(!compositeDisposable.isDisposed()){
             compositeDisposable.dispose();
         }
+    }
+
+    private void onTokenReceived(User.UserResponse userResponse){
+        repository.persistToken(userResponse.getUser().getToken());
+        view.setProgressBarVisible(false);
+        view.navigateToDogList();
+    }
+
+    private void onTokenGenerationError(Throwable throwable){
+        if(throwable instanceof IOException){
+            view.showMessage("Network error!");
+        }
+        else{
+            view.showMessage("API error!");
+        }
+        view.setProgressBarVisible(false);
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,6 +72,11 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
         dogRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         dogRecyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(dogRecyclerView, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
