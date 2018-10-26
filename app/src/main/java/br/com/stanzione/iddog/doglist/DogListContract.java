@@ -12,6 +12,7 @@ public interface DogListContract {
 
     interface View extends BaseView {
         void showDogGallery(List<String> imageUrlList);
+        void setEmptyStateVisible(boolean visible);
     }
 
     interface Presenter extends BasePresenter<View> {

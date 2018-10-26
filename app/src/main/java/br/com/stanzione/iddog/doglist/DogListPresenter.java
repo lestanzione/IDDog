@@ -23,6 +23,7 @@ public class DogListPresenter implements DogListContract.Presenter {
     @Override
     public void getImageList(DogType dogType) {
 
+        view.setEmptyStateVisible(false);
         view.setProgressBarVisible(true);
 
         compositeDisposable.clear();
@@ -45,6 +46,10 @@ public class DogListPresenter implements DogListContract.Presenter {
 
                                         view.setProgressBarVisible(false);
                                         view.showDogGallery(dogGallery.getImageUrlList());
+
+                                        if(null == dogGallery.getImageUrlList()){
+                                            view.setEmptyStateVisible(true);
+                                        }
                                     }
                                 },
                                 new Consumer<Throwable>() {

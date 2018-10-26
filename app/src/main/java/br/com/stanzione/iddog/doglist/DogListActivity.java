@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
 
     @BindView(R.id.bottomNavigationView)
     BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.emptyListTextView)
+    TextView emptyListTextView;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -70,6 +74,15 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
     @Override
     public void showDogGallery(List<String> imageUrlList) {
         adapter.setItems(imageUrlList);
+    }
+
+    @Override
+    public void setEmptyStateVisible(boolean visible) {
+        if (visible) {
+            emptyListTextView.setVisibility(View.VISIBLE);
+        } else {
+            emptyListTextView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
