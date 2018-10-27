@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ import butterknife.ButterKnife;
 
 public class DogListActivity extends AppCompatActivity implements DogListContract.View,
         BottomNavigationView.OnNavigationItemSelectedListener, DogImagesAdapter.OnDogImageSelectedListener {
+
+    private static final String SAVED_IMAGE_URL_LIST = "SavedImageUrlList";
 
     @BindView(R.id.dogRecyclerView)
     RecyclerView dogRecyclerView;
@@ -44,6 +47,7 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
     DogListContract.Presenter presenter;
 
     private DogImagesAdapter adapter;
+    private List<String> imageUrlList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,23 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
 
         setUpUi();
         setUpInjector();
+
+        if(savedInstanceState == null) {
+            presenter.getImageList(DogType.HUSKY);
+        }
+        else{
+            imageUrlList = (List<String>) savedInstanceState.getSerializable(SAVED_IMAGE_URL_LIST);
+            showDogGallery(imageUrlList);
+            if(null == imageUrlList){
+                setEmptyStateVisible(true);
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(SAVED_IMAGE_URL_LIST, (Serializable) imageUrlList);
     }
 
     @Override
@@ -66,7 +87,6 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
                 .inject(this);
 
         presenter.attachView(this);
-        presenter.getImageList(DogType.HUSKY);
     }
 
     private void setUpUi(){
@@ -87,6 +107,7 @@ public class DogListActivity extends AppCompatActivity implements DogListContrac
 
     @Override
     public void showDogGallery(List<String> imageUrlList) {
+        this.imageUrlList = imageUrlList;
         adapter.setItems(imageUrlList);
     }
 

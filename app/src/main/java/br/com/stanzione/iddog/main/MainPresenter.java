@@ -42,9 +42,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void dispose() {
-        if(!compositeDisposable.isDisposed()){
-            compositeDisposable.dispose();
-        }
+        compositeDisposable.clear();
     }
 
     private void onTokenReceived(User.UserResponse userResponse){

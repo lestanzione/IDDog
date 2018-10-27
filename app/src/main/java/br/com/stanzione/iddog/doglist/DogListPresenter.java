@@ -51,9 +51,7 @@ public class DogListPresenter implements DogListContract.Presenter {
 
     @Override
     public void dispose() {
-        if(!compositeDisposable.isDisposed()){
-            compositeDisposable.dispose();
-        }
+        compositeDisposable.clear();
     }
 
     private ObservableSource<DogGallery> mapToDogImageList(String s) {
