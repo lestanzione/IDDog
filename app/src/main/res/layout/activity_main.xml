@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/constraintLayout"
     android:fitsSystemWindows="true"
+    android:layout_marginStart="@dimen/screen_padding"
+    android:layout_marginEnd="@dimen/screen_padding"
     android:background="@color/colorPrimaryLight"
     tools:context=".main.MainActivity">
 
